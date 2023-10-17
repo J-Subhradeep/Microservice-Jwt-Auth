@@ -14,17 +14,40 @@ spring:
     web-application-type: reactive
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+            - GET
+            - POST
       routes:
       - id: PRODUCT-SERVICE
         uri: lb://PRODUCT-SERVICE
         predicates:
         - Path=/products/**
+ 
         filters:
         - AuthenticationFilter
+        metadata:
+          cors:
+            allowedOrigins: '*'
+            allowedMethods: '*'
+            allowedHeaders: '*'
+            maxAge: 30
       - id: AUTH-SERVICE
         uri: lb://AUTH-SERVICE
         predicates:
         - Path=/auth/**    
+        metadata:
+          cors:
+            allowedOrigins: '*'
+            allowedMethods: '*'
+            allowedHeaders: '*'
+            maxAge: 30
+
+
+            
    
 server:
   port: 8082
