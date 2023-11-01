@@ -1,17 +1,9 @@
-eureka:
-  
-  instance:
-    prefer-ip-address: true
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url: 
-      defaultZone: http://localhost:8761/eureka
+
 spring:
   application:
     name: CLOUD-GATEWAY 
-  main:
-    web-application-type: reactive
+#  main:
+#    web-application-type: reactive
   cloud:
     gateway:
       globalcors:
@@ -35,6 +27,7 @@ spring:
             allowedMethods: '*'
             allowedHeaders: '*'
             maxAge: 30
+            
       - id: AUTH-SERVICE
         uri: lb://AUTH-SERVICE
         predicates:
@@ -45,10 +38,12 @@ spring:
             allowedMethods: '*'
             allowedHeaders: '*'
             maxAge: 30
-
-
             
-   
-server:
-  port: 8082
+      - id: WEBSOCKET
+        uri: wss://api.play-real-tictactoe.cloud
+        predicates:
+         - Path=/api/**    
+     
+
+           
   

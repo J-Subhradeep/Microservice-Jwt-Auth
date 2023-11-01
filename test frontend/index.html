@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+
+        var socket = new WebSocket("ws://localhost:8082/api/ws/seconduser/441114d455/ajay/");
+
+        // Listen for the open event
+        socket.onopen = function (event) {
+            // The WebSocket connection is open
+            console.log("WebSocket connection opened");
+
+            // Send a test message to the server
+
+        };
+
+        // Listen for the message event
+        socket.onmessage = function (event) {
+            // Received a message from the server
+            console.log("Received message from server:", event.data);
+        };
+
+        // Listen for the close event
+        socket.onclose = function (event) {
+            // The WebSocket connection is closed
+            console.log("WebSocket connection closed");
+        };
+    </script>
+</body>
+
+</html>
